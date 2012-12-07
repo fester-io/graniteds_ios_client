@@ -168,6 +168,7 @@ static uint32_t g_responseIndex = 1;
         [token addResponder:responder];
     
     [self sendToken:token];
+    [token release];
 }
 
 #pragma mark -
