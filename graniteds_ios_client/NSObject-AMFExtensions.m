@@ -87,11 +87,12 @@
 	
 	if (![self respondsToSelector:selector])
 	{
-		*error = [NSError errorWithDomain:kAMFCoreErrorDomain code:kAMFErrorMethodNotFound 
-			userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-				[NSString stringWithFormat:@"Service %@ does not respond to selector %@ (%@)", 
-					[self className], methodName, selectorName], 
-				NSLocalizedDescriptionKey, nil]];
+        if (error)
+            *error = [NSError errorWithDomain:kAMFCoreErrorDomain code:kAMFErrorMethodNotFound 
+                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                    [NSString stringWithFormat:@"Service %@ does not respond to selector %@ (%@)", 
+                        [self className], methodName, selectorName], 
+                    NSLocalizedDescriptionKey, nil]];
 		return nil;
 	}
 
@@ -99,11 +100,12 @@
 	if (([signature numberOfArguments] - 2) != 
 		(argumentToPrepend == nil ? [arguments count] : [arguments count] + 1))
 	{
-		*error = [NSError errorWithDomain:kAMFCoreErrorDomain code:kAMFErrorArgumentMismatch
-			userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-				[NSString stringWithFormat:@"Number of arguments do not match (%d/%d)", 
-					[arguments count], ([signature numberOfArguments] - 2)], 
-				NSLocalizedDescriptionKey, nil]];
+        if (error)
+            *error = [NSError errorWithDomain:kAMFCoreErrorDomain code:kAMFErrorArgumentMismatch
+                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                    [NSString stringWithFormat:@"Number of arguments do not match (%d/%d)", 
+                        [arguments count], ([signature numberOfArguments] - 2)], 
+                    NSLocalizedDescriptionKey, nil]];
 		return nil;
 	}
 	
