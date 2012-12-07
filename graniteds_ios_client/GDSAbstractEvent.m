@@ -47,7 +47,7 @@
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"Parameter token cannot be null"
                                      userInfo:nil];
-    if ((self == [self init]))
+    if ((self = [self init]))
     {
         m_token = [token retain];
     }

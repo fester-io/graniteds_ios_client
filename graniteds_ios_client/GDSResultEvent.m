@@ -64,7 +64,7 @@
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"Parameters token and response cannot be null"
                                      userInfo:nil];
-    if ((self == [super initWithToken:token]))
+    if ((self = [super initWithToken:token]))
     {
         m_response = [response retain];
     }
