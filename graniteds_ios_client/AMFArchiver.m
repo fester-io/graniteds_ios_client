@@ -37,6 +37,9 @@
  
 */
 
+#include <objc/runtime.h>
+#include <objc/message.h>
+
 #import "AMFArchiver.h"
 
 @class AMF3TraitsInfo;
@@ -199,29 +202,33 @@ static uint16_t g_options = 0;
 
 - (void)setClassName:(NSString *)codedName forClass:(Class)cls
 {
+    NSString* name = [NSString stringWithUTF8String:class_getName(cls)];
 	if (codedName == nil)
-		[m_registeredClasses removeObjectForKey:cls];
+		[m_registeredClasses removeObjectForKey:name];
 	else
-		[m_registeredClasses setObject:codedName forKey:cls];
+		[m_registeredClasses setObject:codedName forKey:name];
 }
 
 + (void)setClassName:(NSString *)codedName forClass:(Class)cls
 {
+    NSString* name = [NSString stringWithUTF8String:class_getName(cls)];
 	if (!g_registeredClasses) g_registeredClasses = [[NSMutableDictionary alloc] init];
 	if (codedName == nil)
-		[g_registeredClasses removeObjectForKey:cls];
+		[g_registeredClasses removeObjectForKey:name];
 	else
-		[g_registeredClasses setObject:codedName forKey:cls];
+		[g_registeredClasses setObject:codedName forKey:name];
 }
 
 - (NSString *)classNameForClass:(Class)cls
 {
-	return [m_registeredClasses objectForKey:cls];
+    NSString* name = [NSString stringWithUTF8String:class_getName(cls)];
+	return [m_registeredClasses objectForKey:name];
 }
 
 + (NSString *)classNameForClass:(Class)cls
 {
-	return [g_registeredClasses objectForKey:cls];
+    NSString* name = [NSString stringWithUTF8String:class_getName(cls)];
+	return [g_registeredClasses objectForKey:name];
 }
 
 + (void)setOptions:(uint16_t)options
