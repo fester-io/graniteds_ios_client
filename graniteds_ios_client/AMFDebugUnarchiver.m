@@ -64,9 +64,10 @@
 	NSZone *temp = [self zone];  // Must not call methods after release
 	[self release];              // Placeholder no longer needed
 
-	return (encoding == kAMF0Version)
-		? [[AMF0DebugUnarchiver allocWithZone:temp] initForReadingWithData:data]
-		: [[AMF3DebugUnarchiver allocWithZone:temp] initForReadingWithData:data];
+    if (encoding == kAMF0Version)
+        return [[AMF0DebugUnarchiver allocWithZone:temp] initForReadingWithData:data];
+    
+    return [[AMF3DebugUnarchiver allocWithZone:temp] initForReadingWithData:data];
 }
 
 @end
