@@ -143,7 +143,7 @@
 		default:
 		{
 			[NSException raise:NSInternalInconsistencyException
-						 format:@"[%@ %@] UnImplemented type: %@",
+						 format:@"[%@ %@] UnImplemented type: %s",
 				[self class], NSStringFromSelector(_cmd), methodReturnType];
 		}
 	}

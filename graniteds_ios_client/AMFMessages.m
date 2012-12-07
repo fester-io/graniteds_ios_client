@@ -151,14 +151,14 @@
     [desc appendFormat:@""];
     
 	return [NSString stringWithFormat:
-@"<%@ = 0x%08x> {\n\
+@"<%@ = 0x%08lx> {\n\
     destination = %@,\n\
     headers =\n\
         %@,\n\
     messageId = %@,\n\
     timestamp = %f,\n\
-    clientId = %@,\n\
-    timeToLive = %f,\n\
+    clientId = %f,\n\
+    timeToLive = %@,\n\
     body =\n\
         %@\n\
 }",
